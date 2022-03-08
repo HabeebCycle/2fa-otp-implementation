@@ -9,6 +9,7 @@ import de.taimos.totp.TOTP;
 import org.apache.commons.codec.binary.Base32;
 import org.apache.commons.codec.binary.Hex;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -45,6 +46,13 @@ public class OtpUtil {
         try(FileOutputStream out = new FileOutputStream(filePath)) {
             MatrixToImageWriter.writeToStream(matrix, "png", out);
         }
+    }
+
+    public static byte[] getQRCode(String barcodeData, int height, int width) throws WriterException, IOException {
+        BitMatrix matrix = new MultiFormatWriter().encode(barcodeData, BarcodeFormat.QR_CODE, width, height);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        MatrixToImageWriter.writeToStream(matrix, "png", out);
+        return out.toByteArray();
     }
 
     public static void infinityGeneratingCodes(String secretKey){

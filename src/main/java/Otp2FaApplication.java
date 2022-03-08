@@ -14,7 +14,8 @@ public class Otp2FaApplication {
         String companyName = "HabeebCycle Company";
         String barCodeUrl = OtpUtil.getGoogleAuthenticatorBarCode(secretKey, email, companyName);
         //System.out.println(barCodeUrl);
-        //OtpUtil.createQRCode(barCodeUrl, "QRCode.png", 400, 400);
+        OtpUtil.createQRCode(barCodeUrl, "QRCode.png", 400, 400);
+        System.out.println(OtpUtil.getQRCode(barCodeUrl, 400, 400).length);
 
         String secret = OtpUtil.generateSecretKey();
         String code = OtpUtil.getTOTPCode(secret);
